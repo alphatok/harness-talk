@@ -1,6 +1,6 @@
 # A field guide to Claude Fable 5: Finding your unknowns
 
-![header](https://aka.doubaocdn.com/s/pqu01wlQfK)
+![header](images/header.png)
 
 - **Category:** [Claude Code](https://claude.com/blog/category/claude-code)
 - **Product:** Claude Code
@@ -13,7 +13,7 @@ When working with Claude Code, I'm often reminded of the difference between the 
 
 The map, a representation of the work to be done, is my prompts and skills and context, it's what I give Claude. The territory is where the work needs to happen, the codebase, the real world, its actual constraints.
 
-![The difference between the map and the territory](https://aka.doubaocdn.com/s/tPs41wlQfK)
+![The difference between the map and the territory](images/map-vs-territory.png)
 
 The difference between the map and the territory is what I call *unknowns*. When Claude runs into an unknown, it needs to make a decision based on its best guess of what I want. The more work being done, the more unknowns Claude might run into.
 
@@ -34,13 +34,13 @@ What are your unknowns? When I come to Claude with a problem I tend to break it 
 
 The best agentic coders have relatively few unknowns. Watching someone like [Boris](https://www.linkedin.com/in/bcherny) or [Jarred](https://www.linkedin.com/in/jarred-sumner-a8772425) prompt, it is obvious to me that they know what they want in-detail. They are deeply in-sync with both the codebase and the model behaviors.
 
-![Best agentic coders](https://aka.doubaocdn.com/s/kNff1wlQfK)
+![Best agentic coders](images/best-agentic-coders.png)
 
 But they also assume unknowns. In many ways, reducing and planning for your unknowns is the **skill** of agentic coding. But luckily, this is a skill you can improve at, by working with Claude.
 
 ## Help Claude help you
 
-![Help Claude help you](https://aka.doubaocdn.com/s/G1IS1wlQfK)
+![Help Claude help you](images/help-claude-help-you.png)
 
 Instructing Claude is a delicate balance. If you are too specific, Claude will follow your instructions even when a pivot may be more appropriate. If you are too vague, Claude will often make choices and assumptions based on industry best practices that may not be a fit for your task.
 

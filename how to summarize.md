@@ -5,12 +5,14 @@ Multi-Layered Summarization ：
 	- 基于“语义锚点”（Semantic Anchors），提供“逻辑骨架”（Logical Backbone），展现论点之间的因果、并列或递进关系。	
 	- 潜在假设的挖掘（Presupposition Hacking）
 - 元认知层（Intent & Context）： 洞察作者的写作意图、核心动机以及该文本在更大知识体系（如某学术领域、某商业竞争）中的生态位。
+- 大众常识相悖 底层事实点（Facts）与非共识论证点（Arguments）
 
 “渐进式/金字塔”多层摘要 (Progressive Summarization)： 从产品或用户体验角度出发的“多层”设计。
 
 
 Deep Comprehension & Analysis 认知反思与多维表征-》从“信息压缩”到“决策支持” + 洞察（Insights）
 - 多视角审视 (Multi-Perspective)
+	- 大众常识相悖 底层事实点（Facts）与非共识论证点（Arguments）
 - 反思与纠偏 (Self-Reflection)
 - 概念抽象化 (Conceptual Abstraction)
 

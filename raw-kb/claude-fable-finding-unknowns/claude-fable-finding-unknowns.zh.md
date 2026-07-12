@@ -1,6 +1,6 @@
 # Claude Fable 5 实战指南：发现你的未知
 
-![header](https://aka.doubaocdn.com/s/pqu01wlQfK)
+![header](images/header.png)
 
 - **分类：** [Claude Code](https://claude.com/blog/category/claude-code)
 - **产品：** Claude Code
@@ -13,7 +13,7 @@
 
 地图，是对即将完成的工作的抽象表达，是我的提示词、技能和上下文——这是我交给 Claude 的东西。而实地，是工作真正需要发生的地方——代码库、真实世界、它的实际约束。
 
-![地图与实地的区别](https://aka.doubaocdn.com/s/tPs41wlQfK)
+![地图与实地的区别](images/map-vs-territory.png)
 
 "地图"与"实地"之间的差距，就是我所说的*未知（unknowns）*。当 Claude 遇到未知时，它必须基于对我意图的最佳猜测来做决策。工作量越大，Claude 可能遇到的未知就越多。
 
@@ -34,13 +34,13 @@ Claude Fable 是我遇到的第一个模型——我发现工作质量的瓶颈�
 
 最优秀的 Agent 编码者，拥有的未知相对较少。看 [Boris](https://www.linkedin.com/in/bcherny) 或 [Jarred](https://www.linkedin.com/in/jarred-sumner-a8772425) 这样的人写提示词，很明显他们在细节上知道自己想要什么。他们与代码库和模型行为都深度同步。
 
-![最优秀的 Agent 编码者](https://aka.doubaocdn.com/s/kNff1wlQfK)
+![最优秀的 Agent 编码者](images/best-agentic-coders.png)
 
 但他们也会为未知留出余地。从很多方面来说，减少和规划你的未知，就是 Agent 编码的**核心技能**。但幸运的是，通过与 Claude 合作，这个技能是可以提升的。
 
 ## 帮 Claude 更好地帮你
 
-![帮 Claude 更好地帮你](https://aka.doubaocdn.com/s/G1IS1wlQfK)
+![帮 Claude 更好地帮你](images/help-claude-help-you.png)
 
 指导 Claude 是一种微妙的平衡。如果你过于具体，Claude 会严格遵循你的指令，即使转向可能更合适。如果你过于模糊，Claude 往往会基于行业最佳实践做出选择和假设，但这些可能不适合你的任务。
 
