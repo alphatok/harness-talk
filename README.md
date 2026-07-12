@@ -21,6 +21,7 @@
 | Shopify 生产级 Agentic 系统 | [EN](RAW-KB/shopify-agentic-systems/building-production-ready-agentic-systems.md) | [CN](RAW-KB/shopify-agentic-systems/building-production-ready-agentic-systems.zh.md) | [TLDR](RAW-KB/shopify-agentic-systems-tldr.md) |
 | Perplexity Agent Skills | [EN](RAW-KB/perplexity-agent-skills/designing-agent-skills.md) | [CN](RAW-KB/perplexity-agent-skills/designing-agent-skills.zh.md) | [TLDR](RAW-KB/perplexity-agent-skills-tldr.md) |
 | Agentic Engineering SOP | [EN](RAW-KB/agentic-engineering/vibe-coding-to-agentic-engineering-sop.md) | - | - |
+| Agentic Engineering Hacks | [EN](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks.md) | [CN](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks.zh.md) | [TLDR](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks-tldr.md) |
 
 ### LLM 推理
 
@@ -46,6 +47,7 @@
 - [Shopify Sidekick - 最佳实践](shopify-sidekick-agentic-system-best-practices.md)
 - [Simplify LLM Reasoning - 最佳实践](simplify-llm-reasoning-best-practices.md)
 - [微信小程序 AI - 最佳实践](wechat-miniprogram-ai-best-practices.md)
+- [Agentic Engineering Hacks - 关键发现](agentic-engineering-hacks-key-findings.md)
 
 ## 🛠️ 方法论与指南
 
