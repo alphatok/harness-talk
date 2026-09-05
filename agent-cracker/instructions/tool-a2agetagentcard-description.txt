@@ -1,0 +1,10 @@
+Get the Agent Card of an A2A agent available to this conversation by agent name.
+Use this before A2ASendMessage. Pass the returned Agent Card `name` as `agent_name` to A2ASendMessage / A2AGetTask / A2ACancelTask.
+
+<available_A2A_agents>
+{%- if a2aAgents and a2aAgents.length > 0 -%}
+{%- for agent in a2aAgents %}
+{{agent.name}}{% if agent.description %}：{{agent.description}}{% endif %}
+{%- endfor -%}
+{%- endif %}
+</available_A2A_agents>

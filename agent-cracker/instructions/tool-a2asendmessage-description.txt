@@ -1,0 +1,17 @@
+Send a message to one outbound A2A (Agent2Agent) agent authorized for this conversation.
+
+Parameters:
+- `agent_name` (required): the target agent's name, exactly as returned by A2AGetAgentCard (the Agent Card `name`), or from an explicit @Agent mention.
+- `message` (required): a concise, self-contained task or question. Do not paste the whole conversation — state the goal and only the context the agent actually needs (the agent has no visibility into this conversation otherwise).
+- `skill_id` (optional): route directly to one declared skill, for @Agent.Skill-style precise dispatch. Only effective when A2AGetAgentCard reported `supports_skill_routing: true` for that agent; otherwise this is ignored.
+- `attachments` (optional): a list of files to attach to the message, each referenced by a fetchable `url` (plus optional `filename` and `media_type`). Each is sent to the agent as a standard A2A file part. The `url` must already be reachable by the remote agent — this tool sends it as-is and does NOT upload, host, or transform the file. Use this when you already have a URL for a file you want the agent to work on; obtain that URL through whatever mechanism your environment provides.
+
+This call is NOT synchronous: it returns immediately with whatever single reply the agent gave, and does not wait for the task to finish. Check the returned status: only completed/failed/canceled/rejected are final. For ANY other status — working, submitted, input-required, or auth-required — you MUST immediately call A2AGetTask with the returned task_id, in the same turn, before doing anything else with this task. Do not wait, and do not ask the user for permission first.
+
+auth-required and input-required are NOT a signal to stop and hand off to the user by themselves — calling A2AGetTask to check status is just reading state, not performing a login or filling credentials on the user's behalf, so it does not conflict with any policy against automating logins. A2AGetTask polls automatically, relays the agent's own request (e.g. "please sign in", a clarifying question) to the user exactly once, and keeps waiting for the remote task to advance — it will surface the eventual outcome once the user (or the agent) resolves whatever it was waiting on.
+
+Behavior notes:
+- Calling the same `agent_id` (and `skill_id`, if used) again in a later turn continues the same conversation with that agent automatically — you don't need to restate prior context.
+- To message multiple agents in one turn, call this tool once per agent as parallel tool calls — one agent failing does not affect the others.
+- Any files or links the agent produced are returned as part of the result text.
+- Not available inside a sub-agent or team-member session — only the main conversation can call outbound A2A agents.

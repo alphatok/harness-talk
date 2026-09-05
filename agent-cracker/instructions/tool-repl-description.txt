@@ -1,0 +1,92 @@
+Execute JavaScript to orchestrate a task in one turn. Session tools are preloaded as async globals — call them directly, no import needed. Supports top-level await. Variables persist across calls within the session — like a notebook kernel.
+
+## When to use this instead of calling tools one by one
+
+Use the REPL when a task takes **more than two tool calls** and those calls are related — that is the single most useful signal. Concretely:
+
+- **Same operation over many items** — read/grep/edit N files, query N records, check N URLs. One loop replaces N round-trips.
+- **A later call depends on an earlier result** — glob then read each hit; list issues then update the matching ones; run a command then branch on its output.
+- **You only need a summary of a large result** — filter/count/aggregate inside the sandbox and return just the conclusion, instead of pulling every intermediate result into the conversation.
+- **Control flow** — conditionals, retry, early exit, `Promise.all` for independent calls.
+
+Worked example — "read the first line of every spec file". One REPL call, not 1 + N:
+
+```js
+const files = await Glob({ pattern: "src/**/*.spec.ts" });
+const heads = [];
+for (const f of files) {
+    heads.push({ file: f.split("/").pop(), head: await Read({ file_path: f, limit: 1 }) });
+}
+return heads;                      // only the summary reaches the conversation
+```
+
+Call a tool directly (not via REPL) for a genuine one-off action: a single `Read`, a single `Bash`, one MCP call. Wrapping one call in JavaScript only adds noise.
+
+## Tools are preloaded (no import)
+
+Built-in tools and connected MCP tools are already global functions — call them directly, no import. MCP tools live on their server object:
+
+```js
+await Bash({ command: "git status --short" });
+await someServer.list_pull_requests({ owner: "alice", repo: "hello-world" });
+```
+
+**The catalog in the `code` parameter description is the authoritative, complete list of what is callable this session — each tool with its parameter shape.** A tool not shown in the catalog is **not available here**, even a familiar built-in name: it may be disabled for this session (e.g. via `--tools`) or its MCP server may not be exposed to the sandbox. Do not call a tool from memory — if it is not in the catalog, calling it throws `X is not defined`. When a tool you expected is missing, pick a listed alternative (e.g. `Grep` or `Bash` for file work) and **keep using the REPL** — do not abandon it and fall back to one-by-one tool calls. The catalog names are reserved; do not shadow them with your own variables. If an MCP server name collides with a reserved name it is prefixed `mcp_`; the catalog shows the exact callable name.
+
+## Discovering tools and parameters
+
+The catalog already lists everything, so you rarely need these — reach for them only when it is not enough:
+
+- `await REPL.searchTools("pull request", { server: "github" })` — when the catalog shows a server as an index line without its tools, or you cannot find a tool by name. Pass an array to widen recall (`["issue", "议题"]`); mixing English and the user's language helps.
+- `await REPL.describeTool("github.search_issues")` — full JSON Schema. Needed when the catalog shows a parameter as `object` (nested shapes are collapsed there) or when a call was rejected for a bad argument. Returns `null` for an unknown name — then use `searchTools` rather than guessing.
+- `await REPL.describeTools([...])` — same, for up to 10 named tools at once.
+
+Discovery results are for your code to branch on. Do not `return` or log them wholesale — both the return value and stdout enter the conversation. Return a conclusion instead.
+
+## Tool results are raw, human-formatted output
+
+A tool call returns exactly what that tool produces for a human reader — not a normalized
+struct. Three consequences worth knowing before you parse anything:
+
+- **MCP tools return a *string*, never a parsed object.** Whether that string holds JSON or
+  plain text is up to each server — MCP only guarantees text. Even one server mixes both:
+  `directory_tree` returns JSON, while `list_directory` returns `[FILE] a.ts` lines and
+  `read_text_file` returns the file verbatim. So **try-parse instead of assuming**, and don't
+  burn a round trip probing the shape:
+
+  ```js
+  const parse = r => { try { return JSON.parse(r); } catch { return String(r); } };
+  const tree = parse(await fs.directory_tree({ path }));   // → array
+  const list = parse(await fs.list_directory({ path }));   // → still a string, fine
+  ```
+
+- **`Read` prefixes every line** with `   1→`. Strip it with `.replace(/^\s*\d+→/gm, "")`
+  — the `m` flag is required; without it only the first line loses its prefix.
+- When you only need matching lines, **prefer `Grep`** over reading whole files and
+  filtering in JS: less text to clean up, and far less of it flows through the sandbox.
+
+Two different failure shapes, don't confuse them: a **permission denial** arrives as a real
+object with an `error` field (`r.error`), whereas a tool's own business error is text inside
+its normal string result (e.g. `'{"error":"not found"}'`, or a plain `Error: ENOENT ...`) —
+check `r.error` first, then inspect the string.
+
+## Handle permission denials
+
+A tool call returns `{ error: "..." }` instead of throwing when permission is denied, so one refused call does not kill the script. Check `error` before using a result:
+
+```js
+const r = await Bash({ command: "rm -rf /tmp/build" });
+if (r.error) { /* denied → change approach, skip, or report it back */ }
+```
+
+Every call goes through the same permission checks as calling the tool directly.
+
+## Sandbox limits
+
+Only the preloaded session tools plus host-provided capability bridges are available. `import()` is reserved for those bridges: call `REPL.listBridges()` to see which specifiers this session actually offers (often none — then any import fails), and `<bridge>.documentation()` for a bridge's API. Nothing else is importable — `node:fs` and npm packages always fail.
+
+## Surfacing results
+
+Return a value (`return x`) or leave it as the last expression — that becomes the tool result. To show an image, return `{ $media: "image/png", data: <base64-or-data-url> }`, or an array mixing text and images (`return [summary, screenshot]`). Use `nodeRepl.write(text)` for extra text output.
+
+Keep scripts focused; execution is bounded by `timeout` (default 30s, max 600s).

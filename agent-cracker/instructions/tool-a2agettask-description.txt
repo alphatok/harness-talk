@@ -1,0 +1,13 @@
+Wait for a previously created outbound A2A task to finish, polling automatically.
+
+Parameters:
+- `agent_name` (required): the same agent name passed to the original A2ASendMessage call.
+- `task_id` (required): the taskId from a prior A2ASendMessage or A2AGetTask result.
+
+This call polls the remote task's real, current state at a steady interval, showing live progress as it goes, and returns once the task reaches a final state (completed/failed/canceled/rejected).
+
+This is the only wait the task gets. If it runs past the time limit, or the remote agent stops answering, the task is canceled and this returns telling you exactly that. Whatever this returns is therefore final: never call A2AGetTask again with the same task_id. If the work is still needed, start it over with A2ASendMessage.
+
+If the task is waiting on external input or auth (input-required/auth-required), that request is relayed to the user once and polling continues — this call keeps waiting for the task to advance rather than handing back a stale copy of what you already saw. Checking status this way is just reading state, not performing a login or filling credentials on the user's behalf, so calling this while the task is waiting on the user to complete a login/approval step out of band does not conflict with any policy against automating logins.
+
+Not available inside a sub-agent or team-member session — only the main conversation can query outbound A2A tasks.
