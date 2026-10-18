@@ -48,6 +48,7 @@
 - [Simplify LLM Reasoning - 最佳实践](simplify-llm-reasoning-best-practices.md)
 - [微信小程序 AI - 最佳实践](wechat-miniprogram-ai-best-practices.md)
 - [Agentic Engineering Hacks - 关键发现](agentic-engineering-hacks-key-findings.md)
+- [理解阶梯 (ASD-STE100 与 3B1B) - 同类 Agent Skill 全景](理解阶梯-Andrej%20Karpathy.md)
 
 ## 🛠️ 方法论与指南
 
