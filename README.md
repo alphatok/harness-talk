@@ -6,34 +6,34 @@
 
 | 文章 | 英文原文 | 中文翻译 | TLDR |
 |------|----------|----------|------|
-| Claude Fable 5：发现未知 | [EN](RAW-KB/claude-fable-finding-unknowns/claude-fable-finding-unknowns.md) | [CN](RAW-KB/claude-fable-finding-unknowns/claude-fable-finding-unknowns.zh.md) | [TLDR](RAW-KB/claude-fable-finding-unknowns/claude-fable-finding-unknowns-tldr.md) |
-| Claude Think Tool | [EN](RAW-KB/claude-think-tool/claude-think-tool.md) | [CN](RAW-KB/claude-think-tool/claude-think-tool.zh.md) | [TLDR](RAW-KB/claude-think-tool-tldr.md) |
-| Claude Code Skills | [EN](RAW-KB/claude-code-skills/claude-code-skills.md) | [CN](RAW-KB/claude-code-skills/claude-code-skills.zh.md) | [TLDR](RAW-KB/claude-code-skills/claude-code-skills-tldr.md) |
-| Claude Tool Use & Function Calling 完整指南 | [EN](RAW-KB/claude-tool-use-function-calling-complete-guide-2026.md) | - | [TLDR](RAW-KB/claude-tool-use-function-calling-complete-guide-2026.tldr.md) |
-| Anthropic Managed Agents | [EN](RAW-KB/anthropic-managed-agents/scaling-managed-agents.md) | [CN](RAW-KB/anthropic-managed-agents/scaling-managed-agents.zh.md) | [TLDR](RAW-KB/anthropic-managed-agents-tldr.md) |
+| Claude Fable 5：发现未知 | [EN](raw-kb/claude-fable-finding-unknowns/claude-fable-finding-unknowns.md) | [CN](raw-kb/claude-fable-finding-unknowns/claude-fable-finding-unknowns.zh.md) | [TLDR](raw-kb/claude-fable-finding-unknowns/claude-fable-finding-unknowns-tldr.md) |
+| Claude Think Tool | [EN](raw-kb/claude-think-tool/claude-think-tool.md) | [CN](raw-kb/claude-think-tool/claude-think-tool.zh.md) | [TLDR](raw-kb/claude-think-tool-tldr.md) |
+| Claude Code Skills | [EN](raw-kb/claude-code-skills/claude-code-skills.md) | [CN](raw-kb/claude-code-skills/claude-code-skills.zh.md) | [TLDR](raw-kb/claude-code-skills/claude-code-skills-tldr.md) |
+| Claude Tool Use & Function Calling 完整指南 | [EN](raw-kb/claude-tool-use-function-calling-complete-guide-2026.md) | - | [TLDR](raw-kb/claude-tool-use-function-calling-complete-guide-2026.tldr.md) |
+| Anthropic Managed Agents | [EN](raw-kb/anthropic-managed-agents/scaling-managed-agents.md) | [CN](raw-kb/anthropic-managed-agents/scaling-managed-agents.zh.md) | [TLDR](raw-kb/anthropic-managed-agents-tldr.md) |
 
 ### Agentic Systems
 
 | 文章 | 英文原文 | 中文翻译 | TLDR |
 |------|----------|----------|------|
-| Shopify Sidekick (ICML 2025) | [EN](RAW-KB/shopify-sidekick-icml-2025.md) | [CN](RAW-KB/shopify-sidekick-icml-2025.zh.md) | - |
-| ICML 2025 幻灯片 | [Slides](RAW-KB/icml-2025-shopify-sidekick/slides.md) | - | - |
-| Shopify 生产级 Agentic 系统 | [EN](RAW-KB/shopify-agentic-systems/building-production-ready-agentic-systems.md) | [CN](RAW-KB/shopify-agentic-systems/building-production-ready-agentic-systems.zh.md) | [TLDR](RAW-KB/shopify-agentic-systems-tldr.md) |
-| Perplexity Agent Skills | [EN](RAW-KB/perplexity-agent-skills/designing-agent-skills.md) | [CN](RAW-KB/perplexity-agent-skills/designing-agent-skills.zh.md) | [TLDR](RAW-KB/perplexity-agent-skills-tldr.md) |
-| Agentic Engineering SOP | [EN](RAW-KB/agentic-engineering/vibe-coding-to-agentic-engineering-sop.md) | - | - |
-| Agentic Engineering Hacks | [EN](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks.md) | [CN](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks.zh.md) | [TLDR](RAW-KB/agentic-engineering-hacks/agentic-engineering-hacks-tldr.md) |
+| Shopify Sidekick (ICML 2025) | [EN](raw-kb/shopify-sidekick-icml-2025.md) | [CN](raw-kb/shopify-sidekick-icml-2025.zh.md) | - |
+| ICML 2025 幻灯片 | [Slides](raw-kb/icml-2025-shopify-sidekick/slides.md) | - | - |
+| Shopify 生产级 Agentic 系统 | [EN](raw-kb/shopify-agentic-systems/building-production-ready-agentic-systems.md) | [CN](raw-kb/shopify-agentic-systems/building-production-ready-agentic-systems.zh.md) | [TLDR](raw-kb/shopify-agentic-systems-tldr.md) |
+| Perplexity Agent Skills | [EN](raw-kb/perplexity-agent-skills/designing-agent-skills.md) | [CN](raw-kb/perplexity-agent-skills/designing-agent-skills.zh.md) | [TLDR](raw-kb/perplexity-agent-skills-tldr.md) |
+| Agentic Engineering SOP | [EN](raw-kb/agentic-engineering/vibe-coding-to-agentic-engineering-sop.md) | - | - |
+| Agentic Engineering Hacks | [EN](raw-kb/agentic-engineering-hacks/agentic-engineering-hacks.md) | [CN](raw-kb/agentic-engineering-hacks/agentic-engineering-hacks.zh.md) | [TLDR](raw-kb/agentic-engineering-hacks/agentic-engineering-hacks-tldr.md) |
 
 ### LLM 推理
 
 | 文章 | 英文原文 | 中文翻译 | TLDR |
 |------|----------|----------|------|
-| Simplify LLM Reasoning | [EN](RAW-KB/simplify-llm-reasoning.md) | [CN](RAW-KB/simplify-llm-reasoning.zh.md) | [TLDR](RAW-KB/simplify-llm-reasoning.tldr.md) |
+| Simplify LLM Reasoning | [EN](raw-kb/simplify-llm-reasoning.md) | [CN](raw-kb/simplify-llm-reasoning.zh.md) | [TLDR](raw-kb/simplify-llm-reasoning.tldr.md) |
 
 ### 其他
 
 | 文章 | 英文原文 | 中文翻译 | TLDR |
 |------|----------|----------|------|
-| 微信小程序 AI 最佳实践 | [EN](RAW-KB/wechat-miniprogram-ai/wechat-miniprogram-ai-best-practices.md) | - | [TLDR](RAW-KB/wechat-miniprogram-ai-tldr.md) |
+| 微信小程序 AI 最佳实践 | [EN](raw-kb/wechat-miniprogram-ai/wechat-miniprogram-ai-best-practices.md) | - | [TLDR](raw-kb/wechat-miniprogram-ai-tldr.md) |
 | Karpathy Guidelines | [Skill](skills-asset/karpathy-guidelines/SKILL.md) | - | - |
 
 ## 📝 关键发现与最佳实践
