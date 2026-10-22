@@ -1,10 +1,18 @@
 ---
 name: karpathy-guidelines
-description: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.
+description: AI改代码越改越多，小需求变成大重构？把需求、报错或待审代码交给助手，按Karpathy四项准则先澄清关键假设、选择简单方案、只改相关代码，再用可观察结果验证。帮助减少过度设计、无关改动和“看着完成却没验证”的返工。适合修Bug、加功能、代码审查与按需重构。安装后直接说：“按Karpathy准则修这个问题，先说明假设、最小改动范围和验证方法。”
 license: MIT
+metadata:
+  version: "1.0.1"
 ---
 
-# Karpathy Guidelines
+# Karpathy 编程准则｜少改代码、做对需求
+
+把需求、报错或待审代码交给助手，按下列四项准则控制改动范围并验证结果。适合修复问题、增加功能、代码审查和按需重构；不会保证自动消除所有缺陷。
+
+用法：“按Karpathy准则修这个问题，先说明关键假设、最小改动范围和验证方法。”已有信息不重复询问；只有关键歧义影响实现时才澄清。简单任务按实际情况处理。
+
+原始四项准则如下，保留来源与MIT许可。
 
 Behavioral guidelines to reduce common LLM coding mistakes, derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.
 
