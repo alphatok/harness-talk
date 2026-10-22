@@ -1,0 +1,9 @@
+{
+  "name": "cyber-sales",
+  "repository": "https://modelscope.cn/skills/SingWahAI/cyber-sales",
+  "commit": "6b30fc921eb0f0dc62200574446214b635345c1c",
+  "download_url": "https://modelscope.cn/skills/SingWahAI/cyber-sales/archive/zip/master.zip",
+  "files": 4,
+  "archive_sha256": "8b76621aa0edc4d90b5258ae302c931a55e19c98ad9f470a78e7e8f5558b188b",
+  "match": "名称及功能匹配；原文未提供源链接"
+}

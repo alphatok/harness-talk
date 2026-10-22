@@ -1,0 +1,56 @@
+[
+  {
+    "name": "trade-chat-coach-skills",
+    "repository": "https://github.com/Asaceoo/trade-chat-coach-skills",
+    "commit": "1226badcb0c8fb8c327b9ab2c50cb770cfdef3c7",
+    "source_path": "/",
+    "files": 46,
+    "archive_sha256": "038a0daf2932f24508eba1694ab3a3ecf1840530c16d42712a84274e57dc5087",
+    "match": "名称及功能匹配；原文未提供源链接"
+  },
+  {
+    "name": "ai-sales-champion",
+    "repository": "https://github.com/staruhub/ClaudeSkills",
+    "commit": "66e02d23642f0c63ccb07b46a88104eade402d44",
+    "source_path": "skills/Geek-skills-ai-sales-champion/",
+    "files": 6,
+    "archive_sha256": "24df9c0c41d1d9095d49e9e4f73860ec78f376a1385c75c349a0fde9aef91965",
+    "match": "名称及功能匹配；原文未提供源链接"
+  },
+  {
+    "name": "gtm-skills",
+    "repository": "https://github.com/Prospeda/gtm-skills",
+    "commit": "cfa3e9818cb9d23f19dac153c6268d2f24598d51",
+    "source_path": "/",
+    "files": 280,
+    "archive_sha256": "7ab024719998517694c7ff5cd2fe586cbba0b3e90e49be487903cb6c1511cd7d",
+    "match": "名称及功能匹配；原文未提供源链接"
+  },
+  {
+    "name": "sales-enablement",
+    "repository": "https://github.com/coreyhaines31/marketingskills",
+    "commit": "e85f3cbc2e4a79bf33b2a12e9bdd9087d414735b",
+    "source_path": "skills/sales-enablement/",
+    "files": 9,
+    "archive_sha256": "8577b6c11c1a4474923965a6236406bc47a98ceb9279065e57b4070b1efeedec",
+    "match": "同名开源候选；无法确认是文章所指的 LobeHub 条目"
+  },
+  {
+    "name": "competitive-battlecard",
+    "repository": "https://github.com/phuryn/pm-skills",
+    "commit": "07b34f64ee828df08953f505b7f747aef85ae7c6",
+    "source_path": "pm-go-to-market/skills/competitive-battlecard/",
+    "files": 2,
+    "archive_sha256": "d130353ef35bb139b1beaa3547eab2a504e927382a609cca8727494bb9cf92bd",
+    "match": "同名开源候选；无法确认是文章所指的 LobeHub 条目"
+  },
+  {
+    "name": "cyber-sales",
+    "repository": "https://modelscope.cn/skills/SingWahAI/cyber-sales",
+    "commit": "6b30fc921eb0f0dc62200574446214b635345c1c",
+    "download_url": "https://modelscope.cn/skills/SingWahAI/cyber-sales/archive/zip/master.zip",
+    "files": 4,
+    "archive_sha256": "8b76621aa0edc4d90b5258ae302c931a55e19c98ad9f470a78e7e8f5558b188b",
+    "match": "名称及功能匹配；原文未提供源链接"
+  }
+]

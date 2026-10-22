@@ -1,0 +1,62 @@
+{
+  "type": "crm-card",
+  "data": {
+    "title": "GTM Skills",
+    "fetch": {
+      "targetFunction": "fetchGTMSkillsCard",
+      "objectTypes": [
+        {
+          "name": "DEAL",
+          "propertiesToSend": ["dealstage", "dealname", "amount", "pipeline"]
+        },
+        {
+          "name": "CONTACT",
+          "propertiesToSend": ["email", "firstname", "lastname", "company", "jobtitle"]
+        },
+        {
+          "name": "COMPANY",
+          "propertiesToSend": ["name", "industry", "numberofemployees", "annualrevenue"]
+        }
+      ]
+    },
+    "display": {
+      "properties": [
+        {
+          "name": "prompt_title",
+          "label": "Recommended Prompt",
+          "dataType": "STRING"
+        },
+        {
+          "name": "category",
+          "label": "Category",
+          "dataType": "STRING"
+        },
+        {
+          "name": "confidence",
+          "label": "Relevance",
+          "dataType": "STRING"
+        }
+      ]
+    },
+    "actions": {
+      "baseUrls": ["https://gtm-skills.com"],
+      "primary": [
+        {
+          "type": "IFRAME",
+          "width": 890,
+          "height": 748,
+          "uri": "https://gtm-skills.com/embed/hubspot",
+          "label": "Open GTM Skills"
+        }
+      ],
+      "secondary": [
+        {
+          "type": "ACTION_HOOK",
+          "httpMethod": "POST",
+          "uri": "https://gtm-skills.com/api/v1/prompts/{promptId}/copy",
+          "label": "Copy Prompt"
+        }
+      ]
+    }
+  }
+}
