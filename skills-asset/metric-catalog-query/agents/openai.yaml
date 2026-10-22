@@ -1,0 +1,4 @@
+interface:
+  display_name: "指标问数助手｜先对口径、再查数据"
+  short_description: "基于已建立的指标目录匹配定义、时间和筛选条件，在查询依据与权限均通过核验时读取数据；有歧义先列候选，失败明确说明。帮助减"
+  default_prompt: "Use $metric-catalog-query to resolve this metric question and return verified dashboard data."

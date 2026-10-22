@@ -1,0 +1,117 @@
+{
+  "用例库": {
+    "文本": [
+      "用例编号",
+      "模块",
+      "用例名称",
+      "涉及产品或链路",
+      "前置条件",
+      "操作步骤",
+      "预期结果",
+      "原始节点路径",
+      "关联说明"
+    ],
+    "单选": {
+      "优先级": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "跨产品流程": [
+        "是",
+        "否"
+      ]
+    },
+    "产品/模块": "单选，按当前项目配置；已有表可用--module-field指定其他名称",
+    "文档入口": "超链接",
+    "牵头负责人": {
+      "type": "user",
+      "is_multiple": false,
+      "is_notified": false
+    },
+    "协同负责人": {
+      "type": "user",
+      "is_multiple": true,
+      "is_notified": false
+    }
+  },
+  "注意": "语义模板，不能原样作为CLI请求；字段类型须按随包接口构造。",
+  "测试结果": {
+    "fields": [
+      {
+        "field_title": "产品/模块",
+        "field_type": "single_select",
+        "property_single_select": {
+          "is_quick_add": false,
+          "options": []
+        }
+      },
+      {
+        "field_title": "用例编号",
+        "field_type": "text"
+      },
+      {
+        "field_title": "用例名称",
+        "field_type": "text"
+      },
+      {
+        "field_title": "执行人",
+        "field_type": "user",
+        "property_user": {
+          "is_multiple": false,
+          "is_notified": false
+        }
+      },
+      {
+        "field_title": "执行时间",
+        "field_type": "date_time",
+        "property_date_time": {
+          "format": "yyyy-mm-dd hh:mm",
+          "auto_fill": false
+        }
+      },
+      {
+        "field_title": "测试结果",
+        "field_type": "single_select",
+        "property_single_select": {
+          "is_quick_add": false,
+          "options": [
+            {
+              "text": "未执行",
+              "style": 9
+            },
+            {
+              "text": "通过",
+              "style": 16
+            },
+            {
+              "text": "失败",
+              "style": 18
+            },
+            {
+              "text": "阻塞",
+              "style": 20
+            },
+            {
+              "text": "不适用",
+              "style": 7
+            }
+          ]
+        }
+      },
+      {
+        "field_title": "实际结果",
+        "field_type": "text"
+      },
+      {
+        "field_title": "测试证据",
+        "field_type": "url",
+        "property_url": {
+          "type": "icon_text"
+        }
+      }
+    ],
+    "module_options_source": "读取本次指定用例库的产品/模块字段；字段名可显式配置，不自动增加分类",
+    "rules": "未执行时执行人、时间、实际结果、测试证据留空；真实执行后填写。证据为可访问链接，附件先按企微接口上传。"
+  }
+}

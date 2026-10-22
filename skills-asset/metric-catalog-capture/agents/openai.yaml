@@ -1,0 +1,4 @@
+interface:
+  display_name: "指标目录整理｜口径、看板、查询依据"
+  short_description: "在授权范围内整理页面、指标说明、筛选条件和只读查询证据，生成可检索的指标目录与覆盖清单，帮助减少重复摸索。用法：“为这个"
+  default_prompt: "Use $metric-catalog-capture to capture and validate the metric catalog from this dashboard URL."

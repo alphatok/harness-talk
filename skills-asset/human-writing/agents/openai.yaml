@@ -1,0 +1,4 @@
+interface:
+  display_name: "文章改稿与自然表达助手"
+  short_description: "让文章自然、有材料，保留事实与作者观点"
+  default_prompt: "使用 $human-writing 改写这份材料，保留事实和原意，按读者与文体组织表达。"

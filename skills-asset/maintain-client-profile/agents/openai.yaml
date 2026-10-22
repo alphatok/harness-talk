@@ -1,0 +1,4 @@
+interface:
+  display_name: "客户档案管家｜资料归档、变化追踪"
+  short_description: "把授权资料整理为可追溯的客户、商机和项目档案，记录来源、冲突、修正和过期信息，生成概览与证据视图。帮助减少重复整理和遗漏"
+  default_prompt: "Use $maintain-client-profile to ingest these client materials, propose evidence-backed updates, and render the latest client and opportunity views."

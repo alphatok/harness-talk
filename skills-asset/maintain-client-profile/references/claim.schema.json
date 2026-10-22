@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.example/maintain-client-profile/claim.schema.json",
+  "title": "Client profile claim",
+  "type": "object",
+  "required": ["claim_id", "client_id", "scope", "subject", "predicate", "value", "claim_type", "status", "confidence", "source_refs", "observed_at", "sensitivity"],
+  "properties": {
+    "claim_id": {"type": "string", "pattern": "^clm-[a-z0-9-]+$"},
+    "client_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$"},
+    "domain": {"enum": ["organization", "relationships", "environment", "needs-and-value", "sales-strategy"]},
+    "scope": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["client", "opportunity", "project"]},
+        "id": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "subject": {"type": "string", "minLength": 1},
+    "predicate": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*(\\.[a-z][a-z0-9_-]*)+$"},
+    "value": {},
+    "claim_type": {"enum": ["verified_fact", "customer_statement", "supplier_evidence", "internal_observation", "inference", "hypothesis", "correction"]},
+    "status": {"enum": ["confirmed", "probable", "unverified", "conflicted", "disputed", "stale", "superseded", "rejected"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "source_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "observed_at": {"type": "string"},
+    "effective_at": {"type": ["string", "null"]},
+    "expires_at": {"type": ["string", "null"]},
+    "sensitivity": {"enum": ["public", "internal", "confidential", "restricted"]},
+    "owner": {"type": ["string", "null"]},
+    "supersedes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

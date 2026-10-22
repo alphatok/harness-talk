@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "default_ttl_days": 180,
+  "attention_ratio": 0.75,
+  "rules": [
+    {"prefix": "organization", "ttl_days": 365},
+    {"prefix": "relationships", "ttl_days": 90},
+    {"prefix": "needs_and_value", "ttl_days": 90},
+    {"prefix": "current_claims.opportunity.budget", "ttl_days": 30},
+    {"prefix": "current_claims.opportunity.procurement", "ttl_days": 30},
+    {"prefix": "current_claims.opportunity.competition", "ttl_days": 21},
+    {"prefix": "current_claims.opportunity.timeline", "ttl_days": 30},
+    {"prefix": "current_state.systems", "ttl_days": 180},
+    {"prefix": "delivery_readiness", "ttl_days": 180}
+  ]
+}

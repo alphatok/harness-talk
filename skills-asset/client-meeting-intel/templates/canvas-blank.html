@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客户会议情报画布 · 空白模板（可打印）</title>
+<style>
+  :root {
+    --page-plane: #f9f9f7;
+    --surface-1:  #ffffff;
+    --surface-2:  #fcfcfb;
+    --primary:    #0b0b0b;
+    --secondary:  #52514e;
+    --muted:      #898781;
+    --hairline:   #e1e0d9;
+    --baseline:   #c3c2b7;
+    --border:     rgba(11,11,11,0.10);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+    --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #d03b3b;
+    --ink-success: #006300;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --page-plane: #0d0d0d; --surface-1: #1a1a19; --surface-2: #141413;
+      --primary: #ffffff; --secondary: #c3c2b7; --muted: #898781;
+      --hairline: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+      --ink-success: #0ca30c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --page-plane: #0d0d0d; --surface-1: #1a1a19; --surface-2: #141413;
+    --primary: #ffffff; --secondary: #c3c2b7; --muted: #898781;
+    --hairline: #2c2c2a; --baseline: #383835; --border: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--page-plane); color: var(--primary); font-size: 13px; line-height: 1.55;
+  }
+  .page { max-width: 880px; margin: 0 auto; padding: 28px 36px 60px; }
+  @media print {
+    @page { size: A4; margin: 11mm 10mm; }
+    body { background: #fff; }
+    .page { max-width: none; padding: 0; }
+    .no-print { display: none !important; }
+    .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+    .pb { break-before: page; page-break-before: always; }
+  }
+
+  /* ---------- chrome ---------- */
+  .theme-toggle {
+    position: fixed; top: 14px; right: 14px; z-index: 99;
+    border: 1px solid var(--baseline); border-radius: 999px;
+    background: var(--surface-1); color: var(--secondary);
+    font-size: 12px; padding: 5px 12px; cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+  .kicker { font-size: 11.5px; letter-spacing: .18em; color: var(--muted); text-transform: uppercase; font-weight: 600; }
+  .doc-title { font-size: 23px; font-weight: 800; margin: 3px 0 2px; }
+  .doc-sub { color: var(--secondary); font-size: 13px; }
+
+  .fill {
+    min-height: 22px;
+    outline: none;
+    cursor: text;
+  }
+  .fill:empty::before { content: attr(data-ph); color: var(--baseline); }
+
+  .fill-line {
+    border-bottom: 1px dashed var(--baseline);
+    padding: 2px 0 4px;
+    min-height: 24px;
+  }
+  .fill-line:empty::before { content: attr(data-ph); color: var(--baseline); }
+
+  .meta-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 14px 0 4px; font-size: 13px; color: var(--secondary); }
+  .meta-row .field { display: flex; align-items: baseline; gap: 6px; flex: 1; min-width: 150px; }
+  .meta-row .field .lbl { font-weight: 600; color: var(--primary); white-space: nowrap; }
+  .meta-row .fill-line { flex: 1; min-height: 22px; }
+
+  section { margin-top: 26px; }
+  .sec-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+  .sec-num { font-size: 11.5px; font-weight: 800; color: #fff; background: var(--s1); border-radius: 5px; padding: 2px 7px; }
+  h2 { font-size: 16px; font-weight: 800; }
+  .sec-note { font-size: 11.5px; color: var(--muted); font-weight: 400; margin-left: auto; }
+
+  .tip {
+    font-size: 11.5px; color: var(--secondary); background: var(--surface-2);
+    border: 1px dashed var(--baseline); border-radius: 8px; padding: 8px 12px; margin: 10px 0;
+  }
+  .tip b { color: var(--primary); }
+
+  /* ---------- cheat sheet ---------- */
+  .cheat { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 8px; }
+  .cheat-item {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 8px; font-size: 11px; text-align: center;
+  }
+  .cheat-item .t { font-weight: 700; font-size: 11.5px; }
+  .cheat-item .ex { color: var(--muted); font-size: 10px; margin-top: 2px; line-height: 1.3; }
+
+  /* ---------- canvas ---------- */
+  .canvas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .cell {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; min-height: 120px; display: flex; flex-direction: column;
+  }
+  .cell h3 { font-size: 12px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .cell h3 .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .cell .fill { flex: 1; font-size: 12px; }
+  .cell .fill:empty::before { content: attr(data-ph); color: var(--baseline); font-size: 11.5px; line-height: 1.45; white-space: pre-line; }
+
+  /* ---------- tables ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--surface-1); }
+  th { text-align: left; font-size: 11px; color: var(--muted); font-weight: 600; padding: 6px 8px; border: 1px solid var(--hairline); background: var(--surface-2); }
+  td { padding: 5px 8px; border: 1px solid var(--hairline); vertical-align: middle; }
+  td.fill-td { padding: 0; }
+  td.fill-td .fill { padding: 5px 8px; }
+  td .seg-lbl { font-size: 10.5px; color: var(--muted); text-align: center; padding: 2px 0; }
+  .num-cell { width: 44px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+  tr.add-row td { color: var(--baseline); font-size: 11px; text-align: center; cursor: pointer; }
+  tr.add-row td:empty::before { content: "+ 点击添加一行（可打印版留空）"; }
+
+  .score-row { display: grid; grid-template-columns: 1.3fr repeat(4, 46px) 60px; gap: 4px; align-items: stretch; margin: 4px 0; }
+  .score-row > div { border: 1px dashed var(--baseline); border-radius: 6px; min-height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .score-row > .name { justify-content: flex-start; padding: 4px 8px; font-weight: 600; border-style: solid; border-color: var(--hairline); }
+  .score-row > .hd { border: none; font-size: 10.5px; color: var(--muted); font-weight: 600; min-height: 16px; }
+  .score-row > .tot { font-weight: 700; color: var(--s1); }
+
+  /* ---------- meddicc ---------- */
+  .meddicc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .meddicc .cell { min-height: 90px; }
+  .meddicc .cell h3 .dot { background: var(--s1); }
+
+  /* ---------- action ---------- */
+  .action-row { display: grid; grid-template-columns: 92px 1fr; gap: 10px; margin: 8px 0; }
+  .action-row .when { border: 1px solid var(--baseline); border-radius: 7px; padding: 4px 6px; font-size: 11px; font-weight: 700; color: var(--secondary); text-align: center; display: flex; align-items: center; justify-content: center; }
+  .action-row .fill { border-bottom: 1px dashed var(--baseline); min-height: 30px; font-size: 12px; }
+
+  /* ---------- footer ---------- */
+  .foot { margin-top: 26px; padding-top: 10px; border-top: 1px solid var(--hairline); font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<button class="theme-toggle no-print" onclick="document.documentElement.dataset.theme = (document.documentElement.dataset.theme==='light'?'dark':'light')">◐ 深色/浅色</button>
+
+<div class="page">
+
+  <div class="kicker">客户会议情报画布 · 空白模板</div>
+  <h1 class="doc-title">客户会议情报画布（一页版）</h1>
+  <div class="doc-sub">每场客户会议后 20 分钟填写 · 多场会议连续填写可对比变化趋势 · 打印后手填或直接在浏览器中编辑均可</div>
+
+  <div class="meta-row">
+    <div class="field"><span class="lbl">客户名称</span><div class="fill-line" data-ph="（如：A2 牛奶公司）" contenteditable="true"></div></div>
+    <div class="field"><span class="lbl">会议日期</span><div class="fill-line" data-ph="（如：2026-08-06）" contenteditable="true"></div></div>
+    <div class="field"><span class="lbl">会议场次</span><div class="fill-line" data-ph="（第 1 次 / 2 / 3…）" contenteditable="true"></div></div>
+  </div>
+  <div class="meta-row">
+    <div class="field"><span class="lbl">客户方出席</span><div class="fill-line" data-ph="（名字 + 角色，如：B · IT负责人）" contenteditable="true"></div></div>
+    <div class="field"><span class="lbl">我方出席</span><div class="fill-line" data-ph="" contenteditable="true"></div></div>
+    <div class="field"><span class="lbl">会议主题</span><div class="fill-line" data-ph="" contenteditable="true"></div></div>
+  </div>
+
+  <!-- ============ CHEAT SHEET ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">✚</span><h2>七大信号流速查</h2><span class="sec-note">记录时每条记四要素：原话 + 谁说的 + 情绪强度 + 时间属性</span></div>
+    <div class="cheat">
+      <div class="cheat-item" style="border-top:2px solid var(--s8)"><div class="t" style="color:var(--s8)">① 痛点</div><div class="ex">不满/抱怨/反复提及</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--good)"><div class="t" style="color:var(--good)">② 认可</div><div class="ex">表扬/举例/愿意加码</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--s4)"><div class="t" style="color:var(--s4)">③ 需求</div><div class="ex">明示/隐含/潜在</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--s1)"><div class="t" style="color:var(--s1)">④ 方向</div><div class="ex">战略/时间点/路线</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--s7)"><div class="t" style="color:var(--s7)">⑤ 决策</div><div class="ex">拍板人/预算/标准</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--s2)"><div class="t" style="color:var(--s2)">⑥ 竞争</div><div class="ex">替代方案/比较对象</div></div>
+      <div class="cheat-item" style="border-top:2px solid var(--s6)"><div class="t" style="color:var(--s6)">⑦ 关系</div><div class="ex">情绪/信任/权力格局</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CANVAS ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>一页画布 · 九宫格</h2><span class="sec-note">每格 1–3 条要点，宁少勿多</span></div>
+    <div class="canvas">
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s1)"></span>1 · 客户是谁</h3>
+        <div class="fill" contenteditable="true" data-ph="组织/产品线/参会角色/谁说了算"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s1)"></span>2 · 现状与背景</h3>
+        <div class="fill" contenteditable="true" data-ph="客户在做什么/遇到了什么环境变化/时间窗口"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s8)"></span>3 · 不满（Pain）</h3>
+        <div class="fill" contenteditable="true" data-ph="显性抱怨 + 隐性不满（语气/回避/期望落差）"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--good)"></span>4 · 认可（Gain）</h3>
+        <div class="fill" contenteditable="true" data-ph="明确表扬/加分项/愿意继续合作的点"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s4)"></span>5 · 想要（Wants）</h3>
+        <div class="fill" contenteditable="true" data-ph="明示（直接提的）/ 隐含（描述困境带出的）/ 潜在（我们能给的增量）"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s1)"></span>6 · 方向与路线</h3>
+        <div class="fill" contenteditable="true" data-ph="NOW 马上 / NEXT 近期 / LATER 远期 / NEVER 不做（别踩红线）"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s1)"></span>7 · 决策链</h3>
+        <div class="fill" contenteditable="true" data-ph="谁拍板/谁评估/谁支持我们/流程与时间"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--s2)"></span>8 · 竞争与红线</h3>
+        <div class="fill" contenteditable="true" data-ph="提及的竞对/替代方案/明确拒绝的事"></div>
+      </div>
+      <div class="cell">
+        <h3><span class="dot" style="background:var(--good)"></span>9 · 下一步</h3>
+        <div class="fill" contenteditable="true" data-ph="只写 3 条：从哪个痛点切入/找谁/带什么证据"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXTRACTION ============ -->
+  <section class="pb">
+    <div class="sec-head"><span class="sec-num">02</span><h2>逐条摘录：原话是谈判材料</h2><span class="sec-note">优先记原话，不要转述；每天会后当天完成</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:34px">#</th>
+          <th>原话（直接引语）</th>
+          <th style="width:130px">谁说的 / 角色</th>
+          <th style="width:96px">信号（①–⑦）</th>
+          <th style="width:60px">情绪 1–5</th>
+          <th style="width:80px">时间属性</th>
+        </tr>
+      </thead>
+      <tbody id="extract-body">
+        <tr><td class="num-cell">1</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true" data-ph="①–⑦"></div></td><td class="fill-td"><div class="fill" contenteditable="true" data-ph="1–5"></div></td><td class="fill-td"><div class="fill" contenteditable="true" data-ph="现在/短期/长期"></div></td></tr>
+        <tr><td class="num-cell">2</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">3</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">4</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">5</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">6</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">7</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">8</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">9</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+        <tr><td class="num-cell">10</td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td><td class="fill-td"><div class="fill" contenteditable="true"></div></td></tr>
+      </tbody>
+    </table>
+    <div class="tip">💡 <b>提示：</b>情绪 1–5（1=随口一提，5=强烈情绪反复说）；时间属性=「现在就要 / 短期规划 / 长期愿景 / 已放弃」。下轮谈判可直接引用客户原话推进：「上次您提到 XX，我们做了 Y」。</div>
+  </section>
+
+  <!-- ============ PAIN SCORE ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>痛点评分：急 × 频 × 疼 × 大</h2><span class="sec-note">各 1–5 分，总分 20 · 只排前 6 个痛点</span></div>
+    <div class="score-row">
+      <div class="name hd">痛点（一句话）</div><div class="hd">急</div><div class="hd">频</div><div class="hd">疼</div><div class="hd">大</div><div class="hd">总分</div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="① 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="② 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="③ 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="④ 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="⑤ 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="score-row">
+      <div class="name fill" contenteditable="true" data-ph="⑥ 痛点名称"></div>
+      <div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div><div class="fill" contenteditable="true"></div>
+      <div class="tot fill" contenteditable="true" data-ph="/20"></div>
+    </div>
+    <div class="tip">💡 <b>定义：</b>急=客户多想要解决（紧迫性）· 频=多久发生一次 · 疼=影响多大（钱/效率/风险）· 大=覆盖范围（一个部门还是全公司）。总分 ≥15 且「急」≥4 → 优先打。</div>
+  </section>
+
+  <!-- ============ MEDDICC ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>MEDDICC 速记</h2><span class="sec-note">成交要素七格 · 每格 1–2 条</span></div>
+    <div class="meddicc">
+      <div class="cell"><h3><span class="dot"></span>M · 量化指标</h3><div class="fill" contenteditable="true" data-ph="客户要什么可量化的改善？未明确则待双方确认"></div></div>
+      <div class="cell"><h3><span class="dot"></span>E · 经济买家</h3><div class="fill" contenteditable="true" data-ph="谁拍板？预算在哪？"></div></div>
+      <div class="cell"><h3><span class="dot"></span>D · 决策标准</h3><div class="fill" contenteditable="true" data-ph="客户评估时看什么？（价格/技术/成熟度/合规…）"></div></div>
+      <div class="cell"><h3><span class="dot"></span>D · 决策流程</h3><div class="fill" contenteditable="true" data-ph="下一步是什么？谁批？多久？"></div></div>
+      <div class="cell"><h3><span class="dot"></span>I · 核心痛点</h3><div class="fill" contenteditable="true" data-ph="最痛的一个是什么？（从 03 表挑最高分）"></div></div>
+      <div class="cell"><h3><span class="dot"></span>C · Champion</h3><div class="fill" contenteditable="true" data-ph="谁是内部支持者？还缺哪个角色？"></div></div>
+      <div class="cell"><h3><span class="dot"></span>C · 竞对</h3><div class="fill" contenteditable="true" data-ph="客户还看谁？我们的替代方案是什么？"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ACTIONS ============ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>三个下一步（只写三件事）</h2><span class="sec-note">从哪个痛点切入 / 找谁 / 带什么价值证据</span></div>
+    <div class="action-row"><div class="when">下一步 ①</div><div class="fill" contenteditable="true" data-ph="动作 + 负责人 + 截止时间"></div></div>
+    <div class="action-row"><div class="when">下一步 ②</div><div class="fill" contenteditable="true" data-ph=""></div></div>
+    <div class="action-row"><div class="when">下一步 ③</div><div class="fill" contenteditable="true" data-ph=""></div></div>
+    <div class="action-row"><div class="when">待确认问题</div><div class="fill" contenteditable="true" data-ph="下次会议前要核实的信息（人名/数据/竞对情报…）"></div></div>
+  </section>
+
+  <div class="foot">
+    <p>使用方法：① 会后当天填 01 画布（20 分钟）→ ② 从纪要摘原话进 02 表 → ③ 打分排 03 → ④ 用 04/05 定动作。多场会议连续填写，可对比「痛点变化 / 需求演进 / 关系升温」。</p>
+    <p>配套工具：SPIN（现状/问题/后果/期望回报）· Kano（基本型=入场券、期望型=比参数、兴奋型=差异化）· Miller Heiman 反应模式（成长/困境/自我中心/过度自信决定打法）</p>
+  </div>
+
+</div>
+</body>
+</html>

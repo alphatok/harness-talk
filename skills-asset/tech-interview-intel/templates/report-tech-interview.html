@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  tech-interview-intel · 模板：采访情报分析报告
+  用法：本文件是「模板即资产」——CSS 与章节结构是已校验的设计，不要改动；
+  每次生成时复制本文件到输出目录，只替换 {{占位}} 内容区，并保持 10 个章节锚点。
+  档位规则：速览 = s01+s02+s03(Top3)+s09；标准 = s01–s09；深度 = 全部。
+  未启用章节填一行 <p class="sec-note">（本档位不生成此章；…）</p>，不留占位。
+  evidence-toggle 折叠组默认只给前 2 组加 open 属性；打印前脚本会自动展开。
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{受访者/主题}} · 采访情报分析报告 · {{YYYY-MM-DD}}</title>
+<style>
+:root{
+  --bg:#f5f4f0; --ink:#1d2025; --muted:#6b707a; --card:#ffffff; --line:#e4e1d8;
+  --s1:#c8503f; --s2:#d97e20; --s3:#b58a1e; --s4:#3f8f5f; --s5:#2f8fa3; --s6:#3a6fb0; --s7:#7a5fb0; --s8:#8a8f99;
+  --shadow:0 1px 3px rgba(20,22,26,.06); --radius:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#15161a; --ink:#e9e7e1; --muted:#9aa0ab; --card:#1e2026; --line:#30333b;
+  --s1:#e2695a; --s2:#e8964a; --s3:#c9a548; --s4:#5aa37d; --s5:#52a4b8; --s6:#5f8fc9; --s7:#9475c9; --s8:#9aa0ab;
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --bg:#15161a; --ink:#e9e7e1; --muted:#9aa0ab; --card:#1e2026; --line:#30333b;
+  --s1:#e2695a; --s2:#e8964a; --s3:#c9a548; --s4:#5aa37d; --s5:#52a4b8; --s6:#5f8fc9; --s7:#9475c9; --s8:#9aa0ab;
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+}
+:root[data-theme="light"]{
+  --bg:#f5f4f0; --ink:#1d2025; --muted:#6b707a; --card:#ffffff; --line:#e4e1da;
+  --s1:#c8503f; --s2:#d97e20; --s3:#b58a1e; --s4:#3f8f5f; --s5:#2f8fa3; --s6:#3a6fb0; --s7:#7a5fb0; --s8:#8a8f99;
+  --shadow:0 1px 3px rgba(20,22,26,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.65 -apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+::selection{background:var(--s3);color:#fff}
+.page{max-width:1180px;margin:0 auto;padding:28px 26px 64px}
+a{color:var(--s6);text-decoration:none}
+b,strong{font-weight:650}
+
+/* ---------- 顶栏与主题切换 ---------- */
+.topbar{display:flex;justify-content:flex-end;gap:10px;margin-bottom:10px}
+.theme-toggle{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:999px;padding:5px 14px;font-size:13px}
+.theme-toggle:hover{color:var(--ink);border-color:var(--s8)}
+/* ---------- 左侧目录 ---------- */
+.toc{position:fixed;left:max(16px,calc(50vw - 772px));top:96px;width:170px;background:transparent}
+.toc a{display:block;padding:6px 10px;border-left:2px solid var(--line);color:var(--muted);font-size:13px;margin:2px 0}
+.toc a:hover{color:var(--ink)}
+.toc a.active{color:var(--ink);border-left-color:var(--s1);font-weight:650}
+@media (max-width:1560px){
+  .toc{display:none}
+}
+/* 移动端横向目录 */
+.mtoc{display:none;position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  overflow-x:auto;white-space:nowrap;padding:8px 6px;margin:0 -26px 18px}
+.mtoc a{display:inline-block;padding:4px 12px;border-radius:999px;border:1px solid var(--line);
+  color:var(--muted);font-size:13px;margin-right:6px}
+.mtoc a.active{color:#fff;background:var(--s1);border-color:var(--s1)}
+@media (max-width:1560px){ .mtoc{display:block} }
+section{scroll-margin-top:96px}
+
+/* ---------- 头部 ---------- */
+.kicker{color:var(--s2);font-size:12.5px;font-weight:650;letter-spacing:.12em;margin:6px 0 4px}
+.doc-title{font-size:30px;line-height:1.3;margin:2px 0 8px;letter-spacing:.01em}
+.doc-sub{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.meta-cell{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;box-shadow:var(--shadow)}
+.meta-cell .k{font-size:12px;color:var(--muted);margin-bottom:2px}
+.meta-cell .v{font-size:13.5px;font-weight:600}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--s2);border-radius:var(--radius);padding:12px 16px;text-align:center;box-shadow:var(--shadow)}
+.stat .num{font-size:28px;font-weight:750;line-height:1.1}
+.stat .lbl{font-size:12px;color:var(--muted);margin-top:2px}
+.tl-dr{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--s2);border-radius:var(--radius);
+  padding:14px 18px;font-size:15px;box-shadow:var(--shadow)}
+.tl-dr .who{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+
+/* ---------- 章节 ---------- */
+section{margin-top:34px}
+.sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:16px}
+.sec-num{font-size:21px;font-weight:750;color:var(--s1);font-variant-numeric:tabular-nums}
+.sec-head h2{font-size:21px;margin:0}
+.sec-note{color:var(--muted);font-size:13px}
+.h3{font-size:16px;margin:18px 0 10px;color:var(--ink)}
+.callout{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--s6);border-radius:var(--radius);padding:12px 16px;margin:14px 0;box-shadow:var(--shadow)}
+.callout.warn{border-left-color:var(--s1)}
+.callout.ok{border-left-color:var(--s4)}
+ul.tight{margin:6px 0;padding-left:20px}
+ul.tight li{margin:4px 0}
+
+/* ---------- 2×2 矩阵 ---------- */
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;position:relative}
+.matrix .axis{grid-column:1/-1;text-align:center;color:var(--muted);font-size:12.5px;margin:2px 0 -4px}
+.mcell{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);min-height:110px}
+.mcell h4{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:8px}
+.mcell ul{margin:0;padding-left:18px}
+.mcell li{margin:3px 0;font-size:13.5px}
+.mcell.q1{border:2px solid var(--s1);box-shadow:0 2px 10px rgba(200,80,63,.15)}
+.mcell.q2{border-top:3px solid var(--s4)}
+.mcell.q3{border-top:3px dashed var(--s5)}
+.mcell.q4{opacity:.75;border-top:3px solid var(--s8)}
+.axis-label{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:10px}
+@media (max-width:700px){ .matrix{grid-template-columns:1fr} }
+
+/* ---------- 情报卡 ---------- */
+.qcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--s1);border-radius:var(--radius);
+  padding:14px 18px;margin:12px 0;box-shadow:var(--shadow)}
+.qcard-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.qcard-head h4{margin:0;font-size:16px}
+.qf{margin:8px 0}
+.qf b{color:var(--s1);font-size:13px;margin-right:6px}
+.qf blockquote{margin:6px 0 0;padding:8px 12px;background:var(--bg);border-radius:8px;font-size:14px}
+.qf .who{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+.qf.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:700px){ .qf.g2{grid-template-columns:1fr} }
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff}
+.b-q1{background:var(--s1)} .b-q2{background:var(--s4)} .b-q3{background:var(--s5)} .b-q4{background:var(--s8)}
+.b-strong{background:var(--s1)} .b-weak{background:var(--s3)} .b-pending{background:var(--s8)}
+.b-hit{background:var(--s4)} .b-miss{background:var(--s1)} .b-expired{background:var(--s8)}
+.tag{display:inline-block;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 8px}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+table.tbl{border-collapse:collapse;width:100%;min-width:720px;font-size:13.5px}
+.tbl th{background:var(--bg);text-align:left;padding:9px 12px;border-bottom:2px solid var(--line);white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.div-table{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);margin:12px 0;box-shadow:var(--shadow)}
+.div-table .dv{display:contents}
+.div-table .th{background:var(--bg);font-weight:650;padding:9px 12px;font-size:13px;border-bottom:2px solid var(--line)}
+.div-table .td{padding:9px 12px;font-size:13.5px;border-bottom:1px solid var(--line)}
+@media (max-width:700px){ .div-table{grid-template-columns:1fr} .div-table .th{display:none} }
+
+/* ---------- 通用卡片栅格 ---------- */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow)}
+.card h4{margin:0 0 6px;font-size:15px}
+.card ul{margin:0;padding-left:18px;font-size:13.5px}
+.card li{margin:3px 0}
+.aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.aud{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--s7);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow)}
+.aud h4{margin:0 0 6px;font-size:14px}
+.aud ul{margin:0;padding-left:16px;font-size:13px}
+.aud li{margin:4px 0}
+@media (max-width:900px){ .grid-2,.aud-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:600px){ .meta-grid,.hero-stats,.grid-2,.aud-grid{grid-template-columns:1fr} }
+
+/* ---------- 行动清单 ---------- */
+.action{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 16px;margin:10px 0;box-shadow:var(--shadow)}
+.action .when{flex:0 0 110px;font-size:12.5px;font-weight:700;color:#fff;background:var(--s2);border-radius:8px;
+  padding:6px 10px;align-self:flex-start;text-align:center}
+.action .when.hot{background:var(--s1)}
+.action h4{margin:0 0 4px;font-size:15px}
+.action p{margin:0;font-size:13.5px;color:var(--muted)}
+
+/* ---------- 证据折叠 ---------- */
+.ev-group{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:10px 0;box-shadow:var(--shadow);overflow:hidden}
+details.evidence-toggle summary{cursor:pointer;padding:11px 16px;font-weight:650;font-size:14px;list-style:none;user-select:none}
+details.evidence-toggle summary::-webkit-details-marker{display:none}
+details.evidence-toggle summary::before{content:"▸ ";color:var(--s1)}
+details.evidence-toggle[open] summary::before{content:"▾ "}
+details.evidence-toggle[open] summary{border-bottom:1px solid var(--line)}
+.q-list{padding:10px 16px}
+.quote{padding:8px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.quote:first-child{border-top:none}
+.quote .who{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:40px;border-top:2px solid var(--line);padding-top:14px;color:var(--muted);font-size:12.5px}
+.foot p{margin:4px 0}
+
+@media print{
+  .topbar,.toc,.mtoc{display:none!important}
+  body{background:#fff;font-size:12px}
+  .page{max-width:none;padding:0}
+  details{break-inside:avoid}
+  section{break-inside:auto}
+  .stat,.qcard,.card{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="page" id="top">
+
+  <div class="topbar">
+    <button class="theme-toggle" onclick="document.documentElement.dataset.theme=(document.documentElement.dataset.theme==='light'?'dark':'light')">◐ 深色/浅色</button>
+  </div>
+
+  <!-- 桌面侧栏目录 -->
+  <nav class="toc">
+    <a href="#s01">01 一句话结论</a>
+    <a href="#s02">02 非共识 2×2</a>
+    <a href="#s03">03 核心情报卡</a>
+    <a href="#s04">04 预言账本</a>
+    <a href="#s05">05 模型与 Pattern</a>
+    <a href="#s06">06 垂直主题分析</a>
+    <a href="#s07">07 盲区与追问</a>
+    <a href="#s08">08 决策相关性</a>
+    <a href="#s09">09 核验与行动</a>
+    <a href="#s10">10 全量证据</a>
+  </nav>
+  <!-- 移动端横向目录 -->
+  <nav class="mtoc">
+    <a href="#s01">01 结论</a><a href="#s02">02 矩阵</a><a href="#s03">03 情报卡</a>
+    <a href="#s04">04 账本</a><a href="#s05">05 模型</a><a href="#s06">06 主题</a>
+    <a href="#s07">07 盲区</a><a href="#s08">08 决策</a><a href="#s09">09 行动</a><a href="#s10">10 证据</a>
+  </nav>
+
+  <!-- ============ 头部 ============ -->
+  <div class="kicker">前沿技术采访情报分析 · 仅供内部决策使用 · {{档位（速览/标准/深度）}}档</div>
+  <h1 class="doc-title">{{受访者或主题}} · 采访情报分析报告</h1>
+  <div class="doc-sub">{{核心命题一句话：本报告把这次访谈拆成——哪些是共识基线、哪些是非共识情报、哪些可以被现实检验}} · {{YYYY-MM-DD}}</div>
+
+  <div class="meta-grid">
+    <div class="meta-cell"><div class="k">受访者</div><div class="v">{{姓名 + 一句话身份}}</div></div>
+    <div class="meta-cell"><div class="k">采访来源 / 日期</div><div class="v">{{播客/专访名 · 日期 · 长度}}</div></div>
+    <div class="meta-cell"><div class="k">下注立场</div><div class="v">{{他押了什么：创始人卖叙事 / 投资人讲仓位 / 研究者护学派}}</div></div>
+    <div class="meta-cell"><div class="k">档位 / 账本区间</div><div class="v">{{档位}} · 账本新增 {{P####–P####}}</div></div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num s1">{{N}}</div><div class="lbl">Q1 非共识情报卡</div></div>
+    <div class="stat"><div class="num s3">{{N}}</div><div class="lbl">账本新增预测（强 {{n}} / 弱 {{n}}）</div></div>
+    <div class="stat"><div class="num s6">{{N}}</div><div class="lbl">思维模型与 Pattern</div></div>
+    <div class="stat"><div class="num s8">{{N}}</div><div class="lbl">回避/盲区信号</div></div>
+  </div>
+  <div class="tl-dr"><b>TL;DR：</b>{{三段内讲清：他真正押注了什么？哪条判断是我此前没听过但具体可验证的？若为真最该改变的是哪个决策？}}<span class="who">{{一句话可信度校准：他在这上面有切身利益 / 历史命中记录 / 一手经历深浅}}</span></div>
+
+  <!-- ============ 01 一句话结论 ============ -->
+  <section id="s01">
+    <div class="sec-head"><span class="sec-num">01</span><h2>一句话结论</h2><span class="sec-note">30 秒版 · 结论先行</span></div>
+    <p><b>{{最大的一句话判断}}</b>——{{支撑它的最强一条证据（原话）}}。</p>
+    <p>{{第二句：访谈中最反直觉 / 与主流叙事冲突的点，及它值多少关注。}}</p>
+    <p class="sec-note">{{多次采访迭代时：与上期报告的核心变化（观点漂移 / 账本验证结果 / 立场变化）。单次采访删本行。}}</p>
+  </section>
+
+  <!-- ============ 02 非共识 2×2 矩阵 ============ -->
+  <section id="s02">
+    <div class="sec-head"><span class="sec-num">02</span><h2>非共识 2×2 矩阵</h2><span class="sec-note">横轴：可证伪性 · 纵轴：共识度</span></div>
+    <div class="matrix">
+      <div class="axis">← 可证伪程度高（具体断言）｜低（口号叙事）→</div>
+      <div class="mcell q2">
+        <h4><span class="badge b-q2">Q2</span> 基线事实 · 共识 × 可证伪</h4>
+        <ul>{{条目：可信但人人会说，无超额收益；每条一句话}}</ul>
+      </div>
+      <div class="mcell q1">
+        <h4><span class="badge b-q1">Q1</span> 核心情报 · 非共识 × 可证伪 ★</h4>
+        <ul>{{条目：他信别人不信，且具体到可判定对错——编号 LC# 对应 s03 情报卡}}</ul>
+      </div>
+      <div class="mcell q4">
+        <h4><span class="badge b-q4">Q4</span> 噪音客套 · 共识 × 不可证伪</h4>
+        <ul>{{条目：丢弃；最多一句带过}}</ul>
+      </div>
+      <div class="mcell q3">
+        <h4><span class="badge b-q3">Q3</span> 愿景叙事 · 非共识 × 不可证伪</h4>
+        <ul>{{条目：观察不下注；记录但不进账本}}</ul>
+      </div>
+      <p class="axis-label">共识度以{{基准来源，如「行业公开叙事 / 同主题其他受访者」}}为参照；归类依据在 s03 各卡注明。</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 核心情报卡 ============ -->
+  <section id="s03">
+    <div class="sec-head"><span class="sec-num">03</span><h2>核心情报卡（Q1 明细）</h2><span class="sec-note">每卡六要素：原话 / 证据等级 / 下注立场 / 可证伪判据 / 若为真 / 对谁重要</span></div>
+    {{每卡：
+    <div class="qcard">
+      <div class="qcard-head"><span class="badge b-q1">Q1</span><h4>LC{{#}} · {{观点标题}}</h4><span class="tag">[{{预/观}}·{{一/二/推}}·{{反}}]</span></div>
+      <div class="qf">
+        <b>原话</b>
+        <blockquote>「{{逐字原话}}」<span class="who">— {{受访者 · 出处定位}}</span></blockquote>
+      </div>
+      <div class="qf g2">
+        <div><b>证据等级</b><p>{{一手/二手/推断 + 依据一句}}</p></div>
+        <div><b>下注立场</b><p>{{他押了什么；这条观点失败他损失什么}}</p></div>
+      </div>
+      <div class="qf">
+        <b>可证伪判据</b>
+        <p>对＝{{出现什么现象，最好带时间与量纲}}；错＝{{出现什么现象}}</p>
+      </div>
+      <div class="qf g2">
+        <div><b>若为真</b><p>{{哪一层的格局会变：市场/竞争/技术路线}}</p></div>
+        <div><b>对谁重要</b><p>{{投资人/创业者/工程师/产品 → 各自含义一句}}</p></div>
+      </div>
+    </div>}}
+  </section>
+
+  <!-- ============ 04 预言账本 ============ -->
+  <section id="s04">
+    <div class="sec-head"><span class="sec-num">04</span><h2>预言账本条目</h2><span class="sec-note">只收可证伪（强/弱）；叙事层预测留在 s02。</span></div>
+    <div class="tblwrap">
+      <table class="tbl">
+        <tr><th>编号</th><th>预测（压缩）</th><th>档位</th><th>判据摘要</th><th>预估验证</th><th>状态</th></tr>
+        {{每行：<tr><td>{{P####}}</td><td>{{一句话}}</td><td><span class="badge {{b-strong/b-weak}}">{{强/弱}}</span></td><td>{{对=…；错=…（压缩）}}</td><td>{{时间窗}}</td><td><span class="badge {{b-pending/b-hit/b-miss/b-expired}}">{{状态}}</span></td></tr>}}
+      </table>
+    </div>
+    <div class="callout"><strong>账本说明：</strong>{{本次新增 N 条，全部已追加进 knowledge/预言账本.md；编号连续。若本表含既往条目，状态为本次验证回填结果。}}</div>
+  </section>
+
+  <!-- ============ 05 思维模型与 Pattern ============ -->
+  <section id="s05">
+    <div class="sec-head"><span class="sec-num">05</span><h2>思维模型与 Pattern</h2><span class="sec-note">显式 / 反推 / 技术 / 商业 / 叙事 / 反模式</span></div>
+    <div class="h3">◆ 显式思维模型（他明说的）</div>
+    <div class="grid-2">
+      {{每条：<div class="card"><h4>{{M# · 模型名}}</h4><ul><li>{{一句话定义 + 原话/出处}}</li><li>用法：{{他如何应用 + 适用边界}}</li></ul></div>}}
+    </div>
+    <div class="h3">◆ 反推模型（从他的决策倒推 · 推断，需标注）</div>
+    <div class="grid-2">
+      {{每条：<div class="card"><h4>{{模型名}}（反推，推断）</h4><ul><li>行为：{{他做了什么取舍}}</li><li>规则：{{反推出的决策规则 + 适用边界}}</li></ul></div>}}
+    </div>
+    <div class="h3">◆ Pattern 四层</div>
+    <div class="grid-2">
+      <div class="card"><h4>技术架构 Pattern</h4><ul>{{条：tradeoff 选择及理由}}</ul></div>
+      <div class="card"><h4>商业模式 Pattern</h4><ul>{{条：定价/生态位/GtM}}</ul></div>
+      <div class="card"><h4>认知叙事 Pattern</h4><ul>{{条：隐喻演化说明什么阶段}}</ul></div>
+      <div class="card"><h4>反模式（踩过的坑）</h4><ul>{{条：什么做法错了 + 为什么}}</ul></div>
+    </div>
+  </section>
+
+  <!-- ============ 06 垂直主题分析 ============ -->
+  <section id="s06">
+    <div class="sec-head"><span class="sec-num">06</span><h2>垂直主题分析</h2><span class="sec-note">主题地图 / 分歧点 / 成熟度</span></div>
+    <div class="h3">◆ 主题地图</div>
+    <div class="card"><ul>
+      {{要点：领域骨架——谁在做 / 卡点在哪 / 生态链角色与依赖（抽结构，不抄产品名）}}
+    </ul></div>
+    <div class="h3">◆ 分歧点清单</div>
+    <div class="div-table">
+      <div class="dv"><div class="th">议题</div><div class="th">受访者主张（访谈内）</div><div class="th">行业主流 / 外部参照（标注来源）</div></div>
+      {{每行：<div class="dv"><div class="td">{{议题}}</div><div class="td">{{主张}}</div><div class="td">{{主流}}</div></div>}}
+    </div>
+    <div class="h3">◆ 成熟度判断</div>
+    <div class="callout ok"><strong>{{demo 期 / 工程期 / Scale 期 / 衰退期}}</strong>：{{依据（访谈内证据：成本话、规模话、顾虑信号）}}</div>
+  </section>
+
+  <!-- ============ 07 盲区与追问 ============ -->
+  <section id="s07">
+    <div class="sec-head"><span class="sec-num">07</span><h2>盲区与追问</h2><span class="sec-note">没说的 > 说的</span></div>
+    <div class="grid-2">
+      <div class="card"><h4>回避信号</h4><ul>{{条：被追问时转移/含糊/答非所问 + 发生时点；没有则写「本次未捕捉到」}}</ul></div>
+      <div class="card"><h4>该问没问（≤7 条）</h4><ul>{{问题 + 一句为什么关键}}</ul></div>
+    </div>
+    <div class="card" style="margin-top:12px"><h4>能力边界</h4><ul>{{哪块懂 / 哪块明显外行 → 相关结论降权说明}}</ul></div>
+  </section>
+
+  <!-- ============ 08 决策相关性 ============ -->
+  <section id="s08">
+    <div class="sec-head"><span class="sec-num">08</span><h2>决策相关性（SO-WHAT）</h2><span class="sec-note">若为真 → 各视角该做什么 / 停止做什么</span></div>
+    <div class="aud-grid">
+      <div class="aud"><h4>💰 投资人</h4><ul>{{条}}</ul></div>
+      <div class="aud"><h4>🚀 创业者</h4><ul>{{条}}</ul></div>
+      <div class="aud"><h4>🔧 工程师</h4><ul>{{条}}</ul></div>
+      <div class="aud"><h4>🧭 产品</h4><ul>{{条}}</ul></div>
+    </div>
+  </section>
+
+  <!-- ============ 09 核验与行动 ============ -->
+  <section id="s09">
+    <div class="sec-head"><span class="sec-num">09</span><h2>核验与行动</h2><span class="sec-note">让报告活到验证那天</span></div>
+    <div class="callout"><strong>验证时间表：</strong>{{哪些账本条目在什么时间点该回头看一次 + 看什么信号}}</div>
+    {{每条：
+    <div class="action">
+      <div class="when {{now/hot}}">{{时限}}</div>
+      <div><h4>{{动作名}}</h4><p>{{执行内容 + 关键产出}}</p></div>
+    </div>}}
+    <div class="callout warn"><strong>下一步追问（若有机会二访）：</strong><ol class="tight">{{3–5 条，每条指向 s07「该问没问」或情报卡判据缺失处}}</ol></div>
+  </section>
+
+  <!-- ============ 10 全量证据附录 ============ -->
+  <section id="s10">
+    <div class="sec-head"><span class="sec-num">10</span><h2>全量证据附录</h2><span class="sec-note">仅深度档生成 · 逐条可复核</span></div>
+    {{每组：
+    <div class="ev-group">
+      <details class="evidence-toggle" {{前 2 组加 open 其余留空}}>
+        <summary>证据 · {{组名}}（{{N}} 条原话）</summary>
+        <div class="q-list">
+          {{每条：<div class="quote"><b>{{信号记号 [事/观/预/愿·一/二/推·共/非/反]}}</b>「{{逐字原话}}」<span class="who">{{受访者 · 定位}}{{待确认词标注}}</span></div>}}
+        </div>
+      </details>
+    </div>}}
+  </section>
+
+  <div class="foot">
+    <p><b>数据来源：</b>{{采访转录/字幕文件清单 + 辅助材料（履历/同主题访谈）}}；原话为逐字保留（含口语与转写误差，不确定词已标「待确认」）。</p>
+    <p><b>档位：</b>{{速览/标准/深度}} · <b>预言账本：</b>knowledge/预言账本.md 新增 {{P####–P####}}，编号连续。</p>
+    <p><b>内部使用声明：</b>仅供内部决策使用，不建议直接外发；所有「可证伪判据」为分析框架产出而非受访者承诺，引用时以报告原文为准。</p>
+    <p>生成日期：{{YYYY-MM-DD}} · tech-interview-intel</p>
+  </div>
+</div>
+
+<script>
+/* 目录滚动高亮 */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a, .mtoc a'));
+  var secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.classList.remove('active');});
+          var sel='a[href="#'+e.target.id+'"]';
+          document.querySelectorAll(sel).forEach(function(a){a.classList.add('active');});
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(s){obs.observe(s);});
+  }
+})();
+/* 打印前展开全部折叠 */
+window.addEventListener('beforeprint',function(){
+  document.querySelectorAll('details').forEach(function(d){d.setAttribute('open','');});
+});
+/* 裂 image/video 溢出兜底 */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('img,video,iframe').forEach(function(el){el.style.maxWidth='100%';});
+});
+</script>
+</body>
+</html>

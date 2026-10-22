@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.example/maintain-client-profile/client-profile.schema.json",
+  "title": "Materialized client profile",
+  "type": "object",
+  "required": ["schema_version", "profile_meta", "organization", "relationships", "current_state", "needs_and_value", "delivery_readiness", "sales_strategy"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "profile_meta": {
+      "type": "object",
+      "required": ["client_id", "display_name", "owner", "updated_at", "overall_freshness"]
+    },
+    "organization": {"type": "object"},
+    "relationships": {"type": "object"},
+    "current_state": {"type": "object"},
+    "needs_and_value": {"type": "object"},
+    "delivery_readiness": {"type": "object"},
+    "sales_strategy": {"type": "object"}
+  },
+  "additionalProperties": true
+}

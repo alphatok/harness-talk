@@ -1,0 +1,2 @@
+opportunity_id,name,target_primary_mode,end_customer,payer,business_trigger,problem,our_offer,partner_contribution,contract_unit,acceptance_metric,stage,evidence_level,customer_access,budget_clarity,problem_value,evidence_strength,capability_fit,acceptance_clarity,commercial_terms,repeatability,next_gate,owner,due_date,status
+OPP-001,,,,,,,,,,,H0,U,0,0,0,0,0,0,0,0,,,,hypothesis

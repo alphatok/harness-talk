@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.example/maintain-client-profile/source.schema.json",
+  "title": "Client source record",
+  "type": "object",
+  "required": ["source_id", "client_id", "type", "title", "uri", "captured_at", "provider", "authority", "sensitivity"],
+  "properties": {
+    "source_id": {"type": "string", "pattern": "^src-[a-z0-9-]+$"},
+    "client_id": {"type": "string"},
+    "type": {"enum": ["public_research", "meeting_minutes", "transcript", "image", "email", "document", "manual_correction", "system_export", "other"]},
+    "title": {"type": "string", "minLength": 1},
+    "uri": {"type": "string", "minLength": 1},
+    "content_hash": {"type": ["string", "null"]},
+    "captured_at": {"type": "string"},
+    "event_at": {"type": ["string", "null"]},
+    "provider": {"type": "string"},
+    "authority": {"type": "string"},
+    "sensitivity": {"enum": ["public", "internal", "confidential", "restricted"]}
+  },
+  "additionalProperties": true
+}

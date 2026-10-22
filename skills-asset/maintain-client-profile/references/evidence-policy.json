@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "principles": [
+    "Register the source before accepting a claim.",
+    "Keep verified facts, customer statements, supplier evidence, observations, inferences, hypotheses, and corrections separate.",
+    "Never turn absence of mention into a negation.",
+    "Never silently overwrite history; use supersedes and preserve old claims.",
+    "Route unresolved authoritative conflicts to human review."
+  ],
+  "default_type_precedence": [
+    "correction",
+    "verified_fact",
+    "customer_statement",
+    "supplier_evidence",
+    "internal_observation",
+    "inference",
+    "hypothesis"
+  ],
+  "field_authority_examples": {
+    "organization.identity": ["official_registry", "company_official"],
+    "opportunity.budget": ["customer_procurement", "customer_sponsor", "customer_business"],
+    "delivery_readiness.integration": ["customer_it", "approved_technical_document"],
+    "relationships.decision_chain": ["customer_sponsor", "customer_procurement", "cross_source_confirmation"]
+  }
+}

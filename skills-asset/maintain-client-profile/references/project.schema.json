@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Delivery project",
+  "type": "object",
+  "required": ["schema_version", "client_id", "project_id", "name", "owner", "status", "created_at", "updated_at"],
+  "properties": {
+    "status": {"enum": ["planned", "active", "at_risk", "paused", "acceptance", "completed", "terminated"]},
+    "origin_opportunity": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

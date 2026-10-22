@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Opportunity",
+  "type": "object",
+  "required": ["schema_version", "client_id", "opportunity_id", "name", "owner", "status", "created_at", "updated_at"],
+  "properties": {
+    "status": {"enum": ["discovery", "qualified", "solutioning", "poc", "proposal", "procurement", "won", "lost", "suspended", "abandoned"]}
+  },
+  "additionalProperties": true
+}

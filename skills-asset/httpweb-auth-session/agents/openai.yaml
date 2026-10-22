@@ -1,0 +1,4 @@
+interface:
+  display_name: "浏览器登录复用｜免重复登录查接口"
+  short_description: "复用指定网站的授权登录状态，让脚本继续只读查询，减少重复接入与登录"
+  default_prompt: "Use $httpweb-auth-session to capture or refresh a same-origin authenticated browser session bundle and verify it with a read-only probe."

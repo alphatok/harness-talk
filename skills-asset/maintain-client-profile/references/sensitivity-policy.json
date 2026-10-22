@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "levels": {
+    "public": "May appear in an externally shareable view after source verification.",
+    "internal": "Internal business use; omit internal judgments from external views.",
+    "confidential": "Need-to-know access; includes budgets, meeting notes, contacts, and procurement details.",
+    "restricted": "Highest restriction; includes personal sensitive information, credentials, regulated or contract-restricted material."
+  },
+  "external_view_exclusions": ["internal_observation", "inference", "hypothesis", "restricted", "relationship_rating", "win_strategy"]
+}
